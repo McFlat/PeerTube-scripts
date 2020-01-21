@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# return two results from peertube site search api, used for checking if duplicate videos have been imported into the site
+# return one result from peertube site video api
+# ./find-id.sh 777
 
 if [ "$(which wget)" == "" ]; then
   apt install wget;
@@ -9,7 +10,7 @@ if [ "$(which jq)" == "" ]; then
   apt install jq;
 fi
 
-QUERY="$@";
+QUERY="$@"; # 777
 PEERTUBE_URL="https://troo.tube";
 data=$(wget -q "${PEERTUBE_URL}/api/v1/videos/${QUERY}" -O -);
 one=$(echo $data | jq -r .id,.uuid,.name);
